@@ -1,0 +1,132 @@
+/* ===== HOME MODERNO ===== */
+
+.home {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  background: radial-gradient(
+    circle at top left,
+    #1e3a8a,
+    #020617 60%
+  );
+}
+
+/* IZQUIERDA */
+.home-left {
+  padding: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 24px;
+}
+
+.home-left h1 {
+  font-size: 56px;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.home-left h1 span {
+  color: #3b82f6;
+}
+
+.home-left p {
+  font-size: 18px;
+  max-width: 520px;
+  opacity: 0.9;
+}
+
+/* DERECHA */
+.home-right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+}
+
+/* TARJETA */
+.home-card {
+  width: 100%;
+  max-width: 360px;
+  padding: 40px;
+  border-radius: 20px;
+
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  border: 1px solid rgba(255, 255, 255, 0.15);
+
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  animation: fadeUp 0.6s ease-out;
+}
+
+.home-card h2 {
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+
+/* BOTONES */
+.home-card a {
+  text-align: center;
+  padding: 14px;
+  border-radius: 10px;
+  font-weight: 500;
+  transition: all 0.25s ease;
+}
+
+.home-login {
+  background: #2563eb;
+  color: white;
+}
+
+.home-login:hover {
+  background: #1e40af;
+  transform: translateY(-2px);
+}
+
+.home-register {
+  border: 1px solid #2563eb;
+  color: #93c5fd;
+}
+
+.home-register:hover {
+  background: rgba(37, 99, 235, 0.15);
+  transform: translateY(-2px);
+}
+
+/* ANIMACIÓN */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .home {
+    grid-template-columns: 1fr;
+  }
+
+  .home-left {
+    padding: 60px 40px;
+    text-align: center;
+    align-items: center;
+  }
+
+  .home-left h1 {
+    font-size: 42px;
+  }
+
+  .home-right {
+    padding-bottom: 80px;
+  }
+}
