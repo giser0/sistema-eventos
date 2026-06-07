@@ -15,10 +15,6 @@ export class CreatePagoDto {
   metodo!: string;
 
   @IsNotEmpty()
-  @IsString()
-  estado!: string;
-
-  @IsNotEmpty()
   @IsNumber()
   id_reserva!: number;
 
