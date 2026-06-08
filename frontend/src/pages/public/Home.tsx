@@ -5,19 +5,30 @@ import { localService } from "../../services/localService";
 function Home() {
   const [local, setLocal] = useState<any>(null);
 
-  useEffect(() => {
-    const cargarLocal = async () => {
-      try {
-        const data = await localService.getById(1);
-        setLocal(data);
-      } catch (error) {
-        console.error("Error cargando local", error);
+ useEffect(() => {
+
+  const cargarLocal = async () => {
+
+    try {
+
+      const locales =
+        await localService.getAll();
+
+      if (locales.length > 0) {
+        setLocal(locales[0]);
       }
-    };
 
-    cargarLocal();
-  }, []);
+    } catch (error) {
 
+      console.log(error);
+
+    }
+
+  };
+
+  cargarLocal();
+
+}, []);
   if (!local) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-slate-950 text-white">
