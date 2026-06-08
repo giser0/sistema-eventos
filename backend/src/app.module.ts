@@ -21,7 +21,7 @@ import { config } from 'dotenv';
       imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: (config: ConfigService) => ({
-        type: 'mysql',
+        type: 'postgres',
         host: config.get<string>('DB_HOST'),
         port: Number(config.get('DB_PORT')),
         username: config.get<string>('DB_USER'),

@@ -41,7 +41,7 @@ resetToken!: string;
 
 @Column({
   nullable: true,
-  type: "datetime"
+  type: 'timestamp'
 })
 resetTokenExpiration!: Date;
 
