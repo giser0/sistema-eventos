@@ -1,8 +1,5 @@
-import {
-  IsNotEmpty,
-  IsNumber,
-  IsString
-} from 'class-validator';
+import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
+import { Type } from 'class-transformer';
 
 export class CreateServicioExtraDto {
 
@@ -11,7 +8,7 @@ export class CreateServicioExtraDto {
   nombre!: string;
 
   @IsNotEmpty()
+  @Type(() => Number)
   @IsNumber()
   precio!: number;
-
 }
