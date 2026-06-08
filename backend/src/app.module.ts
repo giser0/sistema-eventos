@@ -8,30 +8,30 @@ import { ServiciosExtraModule } from './servicios-extra/servicios-extra.module';
 import { ReservaServicioModule } from './reserva-servicio/reserva-servicio.module';
 import { PagosModule } from './pagos/pagos.module';
 import { LogsAccesoModule } from './logs-acceso/logs-acceso.module';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { config } from 'dotenv';
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
 
-      type: 'mysql',
+    TypeOrmModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: (config: ConfigService) => ({
+        type: 'mysql',
+        host: config.get<string>('DB_HOST'),
+        port: Number(config.get('DB_PORT')),
+        username: config.get<string>('DB_USER'),
+        password: config.get<string>('DB_PASS'),
+        database: config.get<string>('DB_NAME'),
+        autoLoadEntities: true,
+        synchronize: true,
+      }),
+    }),
 
-      host: 'localhost',
-
-      port: 3306,
-
-      username: 'root',
-
-      password: '11540667Swhn',
-
-      database: 'sistemas_eventos',
-
-      autoLoadEntities: true,
-
-      synchronize: true,
-      
-
-    })
-    ,
     UsuariosModule,
     AuthModule,
     ReservasModule,
@@ -39,7 +39,7 @@ import { LogsAccesoModule } from './logs-acceso/logs-acceso.module';
     ServiciosExtraModule,
     ReservaServicioModule,
     PagosModule,
-    LogsAccesoModule
+    LogsAccesoModule,
   ],
 })
 export class AppModule {}

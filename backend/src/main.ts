@@ -2,11 +2,10 @@ import { NestFactory } from '@nestjs/core';
 
 import { AppModule } from './app.module';
 
-import * as dotenv from 'dotenv';
+
 
 import { ValidationPipe } from '@nestjs/common';
 
-dotenv.config();
 
 async function bootstrap() {
 
@@ -21,12 +20,9 @@ async function bootstrap() {
 );
 
   app.enableCors({
-
-    origin: 'http://localhost:5173',
-
-    credentials: true,
-
-  });
+  origin: process.env.CORS_ORIGIN ?? 'http://localhost:5173',
+  credentials: true,
+});
 
   await app.listen(
 
