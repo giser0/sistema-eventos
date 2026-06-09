@@ -19,7 +19,6 @@ import { config } from 'dotenv';
 
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
-      inject: [ConfigService],
       useFactory: (config: ConfigService) => ({
         type: 'postgres',
         host: config.get<string>('DB_HOST'),
@@ -30,6 +29,7 @@ import { config } from 'dotenv';
         autoLoadEntities: true,
         synchronize: true,
       }),
+      inject: [ConfigService],
     }),
 
     UsuariosModule,

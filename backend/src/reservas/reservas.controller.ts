@@ -1,133 +1,135 @@
 import {
-    Body,
-    Controller,
-    Get,
-    Post,
-    Patch,
-    Param,
-    UseGuards,
-    Req,
-    Res,
-    Delete
+  Body,
+  Controller,
+  Get,
+  Post,
+  Patch,
+  Param,
+  UseGuards,
+  Req,
+  Res,
 } from '@nestjs/common';
-import { CreateReservaDto }
-from './dto/create-reserva.dto';
-
-import { UpdateEstadoDto }
-from './dto/update-estado.dto';
+import { AuthGuard } from '@nestjs/passport';
 import type { Request, Response } from 'express';
+
 import { ReservasService } from './reservas.service';
-import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { CreateReservaDto } from './dto/create-reserva.dto';
+import { UpdateEstadoDto } from './dto/update-estado.dto';
 
 const PDFDocument = require('pdfkit');
 
 @Controller('reservas')
-@UseGuards(JwtAuthGuard)
+@UseGuards(AuthGuard('jwt')) // 🔐 PROTECCIÓN GLOBAL
 export class ReservasController {
+  constructor(
+    private readonly reservasService: ReservasService,
+  ) {}
 
-    constructor(
-        private readonly reservasService: ReservasService
-    ) {}
+  // 🔥 TODAS LAS RESERVAS (ADMIN)
+  @Get()
+  obtenerReservas() {
+    return this.reservasService.obtenerReservas();
+  }
 
-    // 🔥 TODAS LAS RESERVAS
-    @Get()
-    obtenerReservas() {
-        return this.reservasService.obtenerReservas();
-    }
+  // 🔥 DASHBOARD
+  @Get('dashboard')
+  obtenerDashboard() {
+    return this.reservasService.obtenerDashboard();
+  }
 
-    // 🔥 DASHBOARD
-    @Get('dashboard')
-    obtenerDashboard() {
-        return this.reservasService.obtenerDashboard();
-    }
+  // 🔥 PENDIENTES DE PAGO
+  @Get('pendientes-pago')
+  obtenerPendientesPago() {
+    return this.reservasService.obtenerPendientesPago();
+  }
 
-    // 🔥 RESERVAS PENDIENTES DE PAGO
-    @Get('pendientes-pago')
-    obtenerPendientesPago() {
-        return this.reservasService.obtenerPendientesPago();
-    }
+  // 🔥 MIS RESERVAS (CLIENTE)
+  @Get('mis-reservas')
+  obtenerMisReservas(
+    @Req() request: Request & { user: any },
+  ) {
+    return this.reservasService.obtenerMisReservas(
+      request.user.id, // 🔥 USUARIO DEL TOKEN
+    );
+  }
 
-    // 🔥 MIS RESERVAS
-    @Get('mis-reservas')
-    obtenerMisReservas(
-        @Req() request: Request & { user: any }
-    ) {
-        return this.reservasService.obtenerMisReservas(
-            request.user.id
-        );
-    }
+  // 🔥 CREAR RESERVA (CLIENTE)
+  @Post()
+  crearReserva(
+    @Req() request: Request & { user: any },
+    @Body() body: CreateReservaDto,
+  ) {
+    return this.reservasService.crearReserva({
+      ...body,
+      usuario: request.user.id, // 🔥 CLAVE
+    });
+  }
 
-    // 🔥 CREAR RESERVA
-   @Post()
-crearReserva(
-  @Body() body: CreateReservaDto
-) {
-  return this.reservasService.crearReserva(body);
-}
+  // 🔥 CAMBIAR ESTADO (ADMIN)
+  @Patch(':id')
+  cambiarEstado(
+    @Param('id') id: string,
+    @Body() body: UpdateEstadoDto,
+  ) {
+    return this.reservasService.cambiarEstado(
+      Number(id),
+      body.estado,
+    );
+  }
 
-    // 🔥 CAMBIAR ESTADO
-    @Patch(':id')
-cambiarEstado(
-  @Param('id') id: string,
-  @Body() body: UpdateEstadoDto
-) {
-        return this.reservasService.cambiarEstado(
-            Number(id),
-            body.estado
-        );
-    }
+  // 🔥 ELIMINAR (LÓGICO)
+  @Patch('eliminar/:id')
+  eliminarReserva(
+    @Param('id') id: string,
+  ) {
+    return this.reservasService.eliminarReserva(
+      Number(id),
+    );
+  }
 
-    // 🔥 ELIMINAR (LÓGICO)
-    @Patch('eliminar/:id')
-    eliminarReserva(@Param('id') id: string) {
-        return this.reservasService.eliminarReserva(
-            Number(id)
-        );
-    }
+  // 🔥 PDF (ADMIN)
+  @Get('reporte/pdf')
+  async generarPDF(
+    @Res() response: Response,
+  ) {
+    const reservas =
+      await this.reservasService.obtenerReservas();
 
-    // 🔥 PDF
-    @Get('reporte/pdf')
-    async generarPDF(@Res() response: Response) {
+    const doc = new PDFDocument({ margin: 40 });
 
-        const reservas =
-            await this.reservasService.obtenerReservas();
+    response.setHeader(
+      'Content-Type',
+      'application/pdf',
+    );
+    response.setHeader(
+      'Content-Disposition',
+      'attachment; filename=reporte_reservas.pdf',
+    );
 
-        const doc = new PDFDocument({ margin: 40 });
+    doc.pipe(response);
 
-        response.setHeader(
-            'Content-Type',
-            'application/pdf'
-        );
-        response.setHeader(
-            'Content-Disposition',
-            'attachment; filename=reporte_reservas.pdf'
-        );
+    doc.fontSize(22).text(
+      'REPORTE DE RESERVAS',
+      { align: 'center' },
+    );
 
-        doc.pipe(response);
+    doc.moveDown(2);
 
-        doc.fontSize(22).text(
-            'REPORTE DE RESERVAS',
-            { align: 'center' }
-        );
+    reservas.forEach((reserva: any) => {
+      doc.fontSize(14).text(
+        `Reserva #${reserva.id_reserva}`,
+        { underline: true },
+      );
 
-        doc.moveDown(2);
+      doc.text(`Cliente: ${reserva.usuario?.nombre || 'N/A'}`);
+      doc.text(`Evento: ${reserva.tipo_evento}`);
+      doc.text(`Fecha: ${reserva.fecha_evento}`);
+      doc.text(`Hora: ${reserva.hora_evento}`);
+      doc.text(`Estado: ${reserva.estado}`);
+      doc.text(`Total: Bs. ${reserva.total_pago}`);
+      doc.moveDown(1);
+    });
 
-        reservas.forEach((reserva: any) => {
-            doc.fontSize(14).text(
-                `Reserva #${reserva.id_reserva}`,
-                { underline: true }
-            );
-
-            doc.text(`Cliente: ${reserva.usuario?.nombre || 'N/A'}`);
-            doc.text(`Evento: ${reserva.tipo_evento}`);
-            doc.text(`Fecha: ${reserva.fecha_evento}`);
-            doc.text(`Hora: ${reserva.hora_evento}`);
-            doc.text(`Estado: ${reserva.estado}`);
-            doc.text(`Total: Bs. ${reserva.total_pago}`);
-
-            doc.moveDown(1);
-        });
-
-        doc.end();
-    }
+    doc.end();
+  }
 }
