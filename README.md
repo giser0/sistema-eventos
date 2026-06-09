@@ -5,7 +5,7 @@ Aplicación web para la gestión y control de reservas de eventos.
 ## Tecnologías utilizadas
 - Frontend: React
 - Backend: NestJS (NodeJS)
-- Base de datos: MySQL
+- Base de datos: Postgre
 - Autenticación con JWT
 - CAPTCHA
 - Docker
