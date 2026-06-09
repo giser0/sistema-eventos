@@ -341,11 +341,10 @@ function Dashboard() {
                   text-sm
                   font-semibold
 
-                  ${
-                    proxima.estado ===
+                  ${proxima.estado ===
                     "confirmado"
-                      ? "bg-green-100 text-green-700"
-                      : "bg-yellow-100 text-yellow-700"
+                    ? "bg-green-100 text-green-700"
+                    : "bg-yellow-100 text-yellow-700"
                   }
                 `}
               >
@@ -390,103 +389,103 @@ function Dashboard() {
 
             reservas.length === 0
 
-            ? (
+              ? (
 
-              <p>
-                No existen reservas
-              </p>
+                <p>
+                  No existen reservas
+                </p>
 
-            )
+              )
 
-            : (
+              : (
 
-              <div className="space-y-4">
+                <div className="space-y-4">
 
-                {
-                  reservas
-                    .slice(0, 5)
-                    .map(reserva => (
+                  {
+                    reservas
+                      .slice(0, 5)
+                      .map(reserva => (
 
-                      <div
-                        key={
-                          reserva.id_reserva
-                        }
-                        className="
+                        <div
+                          key={
+                            reserva.id_reserva
+                          }
+                          className="
                         flex
                         justify-between
                         items-center
                         border-b
                         pb-4
                       "
-                      >
+                        >
 
-                        <div>
+                          <div>
 
-                          <h3
-                            className="
+                            <h3
+                              className="
                             font-semibold
                           "
-                          >
-                            {
-                              reserva.tipo_evento
-                            }
-                          </h3>
+                            >
+                              {
+                                reserva.tipo_evento
+                              }
+                            </h3>
 
-                          <p
-                            className="
+                            <p
+                              className="
                             text-sm
                             text-gray-500
                           "
-                          >
-                            {
-                              reserva.fecha_evento
-                            }
-                          </p>
+                            >
+                              {
+                                reserva.fecha_evento
+                              }
+                            </p>
 
-                        </div>
+                          </div>
 
-                        <div
-                          className="
+                          <div
+                            className="
                           text-right
                         "
-                        >
+                          >
 
-                          <p
-                            className="
+                            <p
+                              className="
                             font-semibold
                           "
-                          >
-                            Bs.
-                            {" "}
-                            {
-                              reserva.total_pago
-                            }
-                          </p>
+                            >
+                              Bs.
+                              {" "}
+                              {
+                                reserva.total_pago
+                              }
+                            </p>
 
-                          <span
-                            className="
+                            <span
+                              className="
                             text-xs
                             bg-slate-100
                             px-3
                             py-1
                             rounded-full
                           "
-                          >
-                            {
-                              reserva.estado
-                            }
-                          </span>
+                            >
+                              {
+                                reserva.estado
+                              }
+                            </span>
+
+                          </div>
 
                         </div>
 
-                      </div>
+                      ))
+                  }
 
-                    ))
-                }
+                </div>
 
-              </div>
-
-            )
+              )
 
           }
 

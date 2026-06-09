@@ -4,7 +4,7 @@ import {
 } from "react";
 
 import AdminLayout
-from "../../layouts/AdminLayout";
+  from "../../layouts/AdminLayout";
 
 import {
   obtenerPagos,
@@ -70,7 +70,7 @@ function Payments() {
 
       }
 
-  };
+    };
 
   const registrarPago =
     async (
@@ -108,7 +108,7 @@ function Payments() {
 
       }
 
-  };
+    };
 
   const eliminarPagoHandler =
     async (
@@ -144,7 +144,7 @@ function Payments() {
 
       }
 
-  };
+    };
 
   const descargarPDF =
     async (
@@ -167,7 +167,7 @@ function Payments() {
 
       }
 
-  };
+    };
 
   return (
 
@@ -310,50 +310,50 @@ function Payments() {
                     reservasPendientes.map(
                       (reserva: any) => (
 
-                      <tr
-                        key={
-                          reserva.id_reserva
-                        }
-                        className="
+                        <tr
+                          key={
+                            reserva.id_reserva
+                          }
+                          className="
                           border-b
                           hover:bg-slate-50
                           transition
                         "
-                      >
+                        >
 
-                        <td className={tdClass}>
-                          #{reserva.id_reserva}
-                        </td>
+                          <td className={tdClass}>
+                            #{reserva.id_reserva}
+                          </td>
 
-                        <td className={tdClass}>
-                          {
-                            reserva.usuario?.nombre
-                          }
-                        </td>
+                          <td className={tdClass}>
+                            {
+                              reserva.usuario?.nombre
+                            }
+                          </td>
 
-                        <td className={tdClass}>
-                          {
-                            reserva.tipo_evento
-                          }
-                        </td>
+                          <td className={tdClass}>
+                            {
+                              reserva.tipo_evento
+                            }
+                          </td>
 
-                        <td
-                          className="
+                          <td
+                            className="
                             px-6
                             py-4
                             font-semibold
                             text-emerald-600
                           "
-                        >
-                          Bs. {
-                            reserva.total_pago
-                          }
-                        </td>
+                          >
+                            Bs. {
+                              reserva.total_pago
+                            }
+                          </td>
 
-                        <td className={tdClass}>
+                          <td className={tdClass}>
 
-                          <span
-                            className="
+                            <span
+                              className="
                               bg-yellow-100
                               text-yellow-700
                               text-xs
@@ -362,23 +362,23 @@ function Payments() {
                               py-1
                               rounded-full
                             "
-                          >
-                            {
-                              reserva.estado
-                            }
-                          </span>
+                            >
+                              {
+                                reserva.estado
+                              }
+                            </span>
 
-                        </td>
+                          </td>
 
-                        <td className={tdClass}>
+                          <td className={tdClass}>
 
-                          <button
-                            onClick={() =>
-                              registrarPago(
-                                reserva
-                              )
-                            }
-                            className="
+                            <button
+                              onClick={() =>
+                                registrarPago(
+                                  reserva
+                                )
+                              }
+                              className="
                               bg-emerald-500
                               hover:bg-emerald-600
                               text-white
@@ -389,15 +389,15 @@ function Payments() {
                               font-medium
                               transition
                             "
-                          >
-                            Registrar Pago
-                          </button>
+                            >
+                              Registrar Pago
+                            </button>
 
-                        </td>
+                          </td>
 
-                      </tr>
+                        </tr>
 
-                    ))
+                      ))
 
                   )
                 }

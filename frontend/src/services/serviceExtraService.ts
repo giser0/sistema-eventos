@@ -10,4 +10,4 @@ export const obtenerServicios =
 
     return response.data;
 
-};
+  };

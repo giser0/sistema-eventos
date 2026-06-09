@@ -1,11 +1,11 @@
 import api from "./api";
 
 export const obtenerLogs =
-async () => {
+  async () => {
 
-  const response =
-    await api.get("/logs");
+    const response =
+      await api.get("/logs");
 
-  return response.data;
+    return response.data;
 
-};
+  };

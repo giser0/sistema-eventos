@@ -15,7 +15,7 @@ function ResetPassword() {
     useState("");
   const navigate = useNavigate();
   const handleSubmit = async (
-    
+
     e: React.FormEvent
   ) => {
 
@@ -28,7 +28,7 @@ function ResetPassword() {
       alert(
         "Las contraseñas no coinciden"
       );
-      
+
       return;
 
     }
@@ -42,7 +42,7 @@ function ResetPassword() {
         {
           token,
           password
-          
+
         }
 
       );

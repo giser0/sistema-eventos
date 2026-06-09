@@ -61,7 +61,7 @@ function NewReservationAdmin() {
       async () => {
 
         const local =
-  await localService.getById(2);
+          await localService.getById(2);
 
         const precio =
           Number(local.precio);
@@ -243,19 +243,19 @@ function NewReservationAdmin() {
 
       } catch (error: any) {
 
-  console.log(error);
+        console.log(error);
 
-  alert(
+        alert(
 
-    error?.response?.data?.message ||
+          error?.response?.data?.message ||
 
-    "Error al crear reserva"
+          "Error al crear reserva"
 
-  );
+        );
 
-}
+      }
 
-  };
+    };
 
   return (
 
@@ -505,18 +505,18 @@ function NewReservationAdmin() {
               {servicios.map(
                 (servicio) => {
 
-                const activo =
-                  seleccionados.includes(
-                    servicio.id_servicio
-                  );
-
-                return (
-
-                  <label
-                    key={
+                  const activo =
+                    seleccionados.includes(
                       servicio.id_servicio
-                    }
-                    className={`
+                    );
+
+                  return (
+
+                    <label
+                      key={
+                        servicio.id_servicio
+                      }
+                      className={`
                       border
                       rounded-2xl
                       p-5
@@ -524,86 +524,85 @@ function NewReservationAdmin() {
                       transition
                       hover:shadow-lg
 
-                      ${
-                        activo
+                      ${activo
                           ? "border-yellow-400 bg-yellow-50"
                           : "bg-white"
-                      }
+                        }
                     `}
-                  >
+                    >
 
-                    <div
-                      className="
+                      <div
+                        className="
                       flex
                       justify-between
                       items-start
                     "
-                    >
+                      >
 
-                      <div>
+                        <div>
 
-                        <h3
-                          className="
+                          <h3
+                            className="
                           font-bold
                           text-lg
                         "
-                        >
-                          {
-                            servicio.nombre
-                          }
-                        </h3>
+                          >
+                            {
+                              servicio.nombre
+                            }
+                          </h3>
 
-                        <p
-                          className="
+                          <p
+                            className="
                           text-slate-500
                           mt-1
                         "
-                        >
-                          Bs.
-                          {" "}
-                          {
-                            servicio.precio
-                          }
-                        </p>
+                          >
+                            Bs.
+                            {" "}
+                            {
+                              servicio.precio
+                            }
+                          </p>
 
-                      </div>
+                        </div>
 
-                      <input
-                        type="checkbox"
-                        checked={activo}
-                        onChange={() =>
+                        <input
+                          type="checkbox"
+                          checked={activo}
+                          onChange={() =>
 
-                          setSeleccionados(
+                            setSeleccionados(
 
-                            activo
+                              activo
 
-                            ? seleccionados.filter(
-                                id =>
-                                  id !==
+                                ? seleccionados.filter(
+                                  id =>
+                                    id !==
+                                    servicio.id_servicio
+                                )
+
+                                : [
+                                  ...seleccionados,
                                   servicio.id_servicio
-                              )
+                                ]
 
-                            : [
-                                ...seleccionados,
-                                servicio.id_servicio
-                              ]
+                            )
 
-                          )
-
-                        }
-                        className="
+                          }
+                          className="
                         w-5
                         h-5
                       "
-                      />
+                        />
 
-                    </div>
+                      </div>
 
-                  </label>
+                    </label>
 
-                );
+                  );
 
-              })}
+                })}
 
             </div>
 

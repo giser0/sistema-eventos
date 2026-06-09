@@ -112,10 +112,10 @@ function NewBooking() {
       e.preventDefault();
 
       if (
-  !tipoEvento ||
-  !fechaEvento ||
-  !cantidadPersonas
-) {
+        !tipoEvento ||
+        !fechaEvento ||
+        !cantidadPersonas
+      ) {
 
         alert(
           "Completa todos los campos"
@@ -128,29 +128,29 @@ function NewBooking() {
       try {
 
         const res =
-  await crearReserva({
+          await crearReserva({
 
-    id_usuario: user.id,
+            id_usuario: user.id,
 
-    id_local: 2,
+            id_local: 2,
 
-    creado_por: user.id,
+            creado_por: user.id,
 
-    fecha_evento: fechaEvento,
+            fecha_evento: fechaEvento,
 
-    hora_evento: horaEvento, // 🔥 AGREGAR ESTO
+            hora_evento: horaEvento, // 🔥 AGREGAR ESTO
 
-    tipo_evento: tipoEvento,
+            tipo_evento: tipoEvento,
 
-    cantidad_personas: Number(
-      cantidadPersonas
-    ),
+            cantidad_personas: Number(
+              cantidadPersonas
+            ),
 
-    total_pago: total,
+            total_pago: total,
 
-    estado: "pendiente"
+            estado: "pendiente"
 
-  });
+          });
 
         // 🔥 guardar servicios
         for (
@@ -190,18 +190,18 @@ function NewBooking() {
 
       } catch (error: any) {
 
-  console.log(error);
+        console.log(error);
 
-  alert(
+        alert(
 
-    error?.response?.data?.message ||
+          error?.response?.data?.message ||
 
-    "Error al crear reserva"
+          "Error al crear reserva"
 
-  );
+        );
 
-}
-  };
+      }
+    };
 
   return (
 
@@ -494,11 +494,11 @@ function NewBooking() {
               {servicios.map(
                 servicio => (
 
-                <label
-                  key={
-                    servicio.id_servicio
-                  }
-                  className="
+                  <label
+                    key={
+                      servicio.id_servicio
+                    }
+                    className="
                   flex
                   items-center
                   justify-between
@@ -510,79 +510,79 @@ function NewBooking() {
                   hover:shadow-md
                   transition
                 "
-                >
+                  >
 
-                  <div
-                    className="
+                    <div
+                      className="
                     flex
                     items-center
                     gap-4
                   "
-                  >
+                    >
 
-                    <input
-                      type="checkbox"
-                      checked={
-                        seleccionados.includes(
-                          servicio.id_servicio
-                        )
-                      }
-                      onChange={() =>
-                        setSeleccionados(
-
+                      <input
+                        type="checkbox"
+                        checked={
                           seleccionados.includes(
                             servicio.id_servicio
                           )
+                        }
+                        onChange={() =>
+                          setSeleccionados(
 
-                          ? seleccionados.filter(
-                              id =>
-                                id !==
-                                servicio.id_servicio
+                            seleccionados.includes(
+                              servicio.id_servicio
                             )
 
-                          : [
-                              ...seleccionados,
-                              servicio.id_servicio
-                            ]
+                              ? seleccionados.filter(
+                                id =>
+                                  id !==
+                                  servicio.id_servicio
+                              )
 
-                        )
-                      }
-                      className="
+                              : [
+                                ...seleccionados,
+                                servicio.id_servicio
+                              ]
+
+                          )
+                        }
+                        className="
                       w-5
                       h-5
                     "
-                    />
+                      />
 
-                    <div>
+                      <div>
 
-                      <h3
-                        className="
+                        <h3
+                          className="
                         font-semibold
                       "
-                      >
-                        {
-                          servicio.nombre
-                        }
-                      </h3>
+                        >
+                          {
+                            servicio.nombre
+                          }
+                        </h3>
+
+                      </div>
 
                     </div>
 
-                  </div>
-
-                  <span
-                    className="
+                    <span
+                      className="
                     font-bold
                     text-green-600
                   "
-                  >
-                    Bs.
-                    {" "}
-                    {servicio.precio}
-                  </span>
+                    >
+                      Bs.
+                      {" "}
+                      {servicio.precio}
+                    </span>
 
-                </label>
+                  </label>
 
-              ))}
+                ))}
 
             </div>
 

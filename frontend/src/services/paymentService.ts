@@ -2,73 +2,73 @@ import api from "./api";
 
 // 🔥 OBTENER PAGOS
 export const obtenerPagos =
-async () => {
+  async () => {
 
-  const response =
-    await api.get("/pagos");
+    const response =
+      await api.get("/pagos");
 
-  return response.data;
+    return response.data;
 
-};
+  };
 
 // 🔥 CREAR PAGO
 export const crearPago =
-async (data: any) => {
+  async (data: any) => {
 
-  const response =
-    await api.post(
-      "/pagos",
-      data
-    );
+    const response =
+      await api.post(
+        "/pagos",
+        data
+      );
 
-  return response.data;
+    return response.data;
 
-};
+  };
 
 // 🔥 ELIMINAR PAGO
 export const eliminarPago =
-async (id: number) => {
+  async (id: number) => {
 
-  const response =
-    await api.patch(
-      `/pagos/eliminar/${id}`
-    );
+    const response =
+      await api.patch(
+        `/pagos/eliminar/${id}`
+      );
 
-  return response.data;
+    return response.data;
 
-};
+  };
 
 // 🔥 DESCARGAR PDF
 export const descargarComprobantePDF =
-async (idPago: number) => {
+  async (idPago: number) => {
 
-  const response =
-    await api.get(
-      `/pagos/comprobante/${idPago}`,
-      {
-        responseType: "blob",
-      }
+    const response =
+      await api.get(
+        `/pagos/comprobante/${idPago}`,
+        {
+          responseType: "blob",
+        }
+      );
+
+    const url =
+      window.URL.createObjectURL(
+        new Blob([response.data])
+      );
+
+    const link =
+      document.createElement("a");
+
+    link.href = url;
+
+    link.setAttribute(
+      "download",
+      `comprobante_${idPago}.pdf`
     );
 
-  const url =
-    window.URL.createObjectURL(
-      new Blob([response.data])
-    );
+    document.body.appendChild(link);
 
-  const link =
-    document.createElement("a");
+    link.click();
 
-  link.href = url;
+    link.remove();
 
-  link.setAttribute(
-    "download",
-    `comprobante_${idPago}.pdf`
-  );
-
-  document.body.appendChild(link);
-
-  link.click();
-
-  link.remove();
-
-};
+  };

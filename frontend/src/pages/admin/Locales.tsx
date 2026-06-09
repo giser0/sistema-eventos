@@ -4,7 +4,7 @@ import {
 } from "react";
 
 import AdminLayout
-from "../../layouts/AdminLayout";
+  from "../../layouts/AdminLayout";
 
 import {
   localService
@@ -32,7 +32,7 @@ function Locales() {
 
       setLocales(data);
 
-  };
+    };
 
   const handleSave =
     async () => {
@@ -67,7 +67,7 @@ function Locales() {
 
       }
 
-  };
+    };
 
   return (
 

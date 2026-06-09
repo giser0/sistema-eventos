@@ -5,30 +5,30 @@ import { localService } from "../../services/localService";
 function Home() {
   const [local, setLocal] = useState<any>(null);
 
- useEffect(() => {
+  useEffect(() => {
 
-  const cargarLocal = async () => {
+    const cargarLocal = async () => {
 
-    try {
+      try {
 
-      const locales =
-        await localService.getAll();
+        const locales =
+          await localService.getAll();
 
-      if (locales.length > 0) {
-        setLocal(locales[0]);
+        if (locales.length > 0) {
+          setLocal(locales[0]);
+        }
+
+      } catch (error) {
+
+        console.log(error);
+
       }
 
-    } catch (error) {
+    };
 
-      console.log(error);
+    cargarLocal();
 
-    }
-
-  };
-
-  cargarLocal();
-
-}, []);
+  }, []);
   if (!local) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-slate-950 text-white">

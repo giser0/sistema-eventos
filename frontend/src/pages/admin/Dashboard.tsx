@@ -8,7 +8,7 @@ import { obtenerDashboard } from "../../services/dashboardService";
 import { descargarReportePDF } from "../../services/reservationService";
 
 import ReservationsPieChart
-from "../../components/ReservationsPieChart";
+  from "../../components/ReservationsPieChart";
 
 function Dashboard() {
 
@@ -103,7 +103,7 @@ function Dashboard() {
             font-bold
           "
           >
-              Administrador
+            Administrador
           </h1>
 
           <p
@@ -360,66 +360,66 @@ function Dashboard() {
 
         {/* GRAFICOS */}
 
-<div
-  className="
+        <div
+          className="
   grid
   md:grid-cols-2
   gap-6
 "
->
+        >
 
-  {/* GRAFICO CIRCULAR */}
+          {/* GRAFICO CIRCULAR */}
 
-  <div
-    className="
+          <div
+            className="
     bg-white
     rounded-3xl
     p-6
     shadow-md
     border
   "
-  >
+          >
 
-    <ReservationsChart
-      pendientes={
-        dashboard?.pendientes || 0
-      }
-      confirmadas={
-        dashboard?.confirmadas || 0
-      }
-      canceladas={
-        dashboard?.canceladas || 0
-      }
-    />
+            <ReservationsChart
+              pendientes={
+                dashboard?.pendientes || 0
+              }
+              confirmadas={
+                dashboard?.confirmadas || 0
+              }
+              canceladas={
+                dashboard?.canceladas || 0
+              }
+            />
 
-  </div>
+          </div>
 
-  {/* GRAFICO BARRAS */}
+          {/* GRAFICO BARRAS */}
 
-  <div
-    className="
+          <div
+            className="
 rounded-3xl
 shadow-xl
 transition
 hover:-translate-y-1
 "
-  >
+          >
 
-    <ReservationsPieChart
-  pendientes={
-    dashboard?.pendientes || 0
-  }
-  confirmadas={
-    dashboard?.confirmadas || 0
-  }
-  canceladas={
-    dashboard?.canceladas || 0
-  }
-/>
+            <ReservationsPieChart
+              pendientes={
+                dashboard?.pendientes || 0
+              }
+              confirmadas={
+                dashboard?.confirmadas || 0
+              }
+              canceladas={
+                dashboard?.canceladas || 0
+              }
+            />
 
-  </div>
+          </div>
 
-</div>
+        </div>
       </div>
 
     </AdminLayout>

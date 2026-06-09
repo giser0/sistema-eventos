@@ -646,12 +646,11 @@ function Input({
           outline-none
           transition
 
-          ${
-            disabled
+          ${disabled
 
-              ? "bg-slate-100 text-slate-500"
+            ? "bg-slate-100 text-slate-500"
 
-              : `
+            : `
                 bg-white
                 focus:ring-2
                 focus:ring-yellow-400

@@ -4,10 +4,10 @@ import {
 } from "react";
 
 import AdminLayout
-from "../../layouts/AdminLayout";
+  from "../../layouts/AdminLayout";
 
 import Modal
-from "../../components/Modal";
+  from "../../components/Modal";
 
 import {
 
@@ -20,7 +20,7 @@ import {
   editarUsuario
 
 }
-from "../../services/userService";
+  from "../../services/userService";
 
 function Users() {
 
@@ -105,7 +105,7 @@ function Users() {
 
       }
 
-  };
+    };
 
   const handleEliminarUsuario =
     async (id: number) => {
@@ -129,7 +129,7 @@ function Users() {
 
       }
 
-  };
+    };
 
   const abrirModalEditar =
     (usuario: any) => {
@@ -138,7 +138,7 @@ function Users() {
 
       setOpenModal(true);
 
-  };
+    };
 
   const guardarEdicion =
     async () => {
@@ -173,7 +173,7 @@ function Users() {
 
       }
 
-  };
+    };
 
   return (
 
@@ -429,10 +429,9 @@ function Users() {
                           rounded-full
                           text-sm
                           font-semibold
-                          ${
-                            usuario.rol === "admin"
-                              ? "bg-red-100 text-red-700"
-                              : "bg-blue-100 text-blue-700"
+                          ${usuario.rol === "admin"
+                            ? "bg-red-100 text-red-700"
+                            : "bg-blue-100 text-blue-700"
                           }
                         `}
                       >

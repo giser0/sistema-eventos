@@ -19,7 +19,7 @@ export const crearReserva =
 
     return response.data;
 
-};
+  };
 export const obtenerMisReservas =
   async () => {
 
@@ -30,7 +30,7 @@ export const obtenerMisReservas =
 
     return response.data;
 
-};
+  };
 export const descargarReportePDF =
   async () => {
 
@@ -44,7 +44,7 @@ export const descargarReportePDF =
 
     return response.data;
 
-};
+  };
 export const eliminarReserva =
   async (id: number) => {
 
@@ -55,7 +55,7 @@ export const eliminarReserva =
 
     return response.data;
 
-};
+  };
 export const cambiarEstadoReserva =
   async (
     id: number,
@@ -71,4 +71,4 @@ export const cambiarEstadoReserva =
     return response.data;
 
 
-};
+  };

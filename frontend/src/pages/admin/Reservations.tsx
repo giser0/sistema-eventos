@@ -4,23 +4,23 @@ import {
 } from "react";
 
 import AdminLayout
-from "../../layouts/AdminLayout";
+  from "../../layouts/AdminLayout";
 
 import PageHeader
-from "../../components/PageHeader";
+  from "../../components/PageHeader";
 
 import Table
-from "../../components/Table";
+  from "../../components/Table";
 
 import ActionButton
-from "../../components/ActionButton";
+  from "../../components/ActionButton";
 
 import {
   obtenerReservas,
   cambiarEstadoReserva,
   eliminarReserva
 }
-from "../../services/reservationService";
+  from "../../services/reservationService";
 
 function Reservations() {
 
@@ -52,7 +52,7 @@ function Reservations() {
 
       }
 
-  };
+    };
 
   const cambiarEstado =
     async (
@@ -75,7 +75,7 @@ function Reservations() {
 
       }
 
-  };
+    };
 
   const eliminar =
     async (
@@ -101,7 +101,7 @@ function Reservations() {
 
       }
 
-  };
+    };
 
   // FILTRO
   const reservasFiltradas =
@@ -239,128 +239,127 @@ function Reservations() {
             {reservasFiltradas.map(
               (reserva) => (
 
-              <tr
-                key={
-                  reserva.id_reserva
-                }
-                className="
+                <tr
+                  key={
+                    reserva.id_reserva
+                  }
+                  className="
                   border-b
                   hover:bg-slate-50
                   transition
                 "
-              >
+                >
 
-                <td className={td}>
-                  #{reserva.id_reserva}
-                </td>
+                  <td className={td}>
+                    #{reserva.id_reserva}
+                  </td>
 
-                <td className={td}>
-                  {reserva.usuario?.nombre}
-                </td>
+                  <td className={td}>
+                    {reserva.usuario?.nombre}
+                  </td>
 
-                <td className={td}>
-                  {reserva.tipo_evento}
-                </td>
+                  <td className={td}>
+                    {reserva.tipo_evento}
+                  </td>
 
-                <td className={td}>
-                  {reserva.fecha_evento}
-                </td>
+                  <td className={td}>
+                    {reserva.fecha_evento}
+                  </td>
 
-                <td className={td}>
-                  {reserva.hora_evento}
-                </td>
+                  <td className={td}>
+                    {reserva.hora_evento}
+                  </td>
 
-                {/* ESTADO */}
+                  {/* ESTADO */}
 
-                <td className={td}>
+                  <td className={td}>
 
-                  <span
-                    className={`
+                    <span
+                      className={`
                       px-3
                       py-1
                       rounded-full
                       text-xs
                       font-semibold
 
-                      ${
-                        reserva.estado ===
-                        "confirmado"
+                      ${reserva.estado ===
+                          "confirmado"
                           ? "bg-green-100 text-green-700"
 
-                        : reserva.estado ===
-                          "cancelado"
-                          ? "bg-red-100 text-red-700"
+                          : reserva.estado ===
+                            "cancelado"
+                            ? "bg-red-100 text-red-700"
 
-                          : "bg-yellow-100 text-yellow-700"
-                      }
+                            : "bg-yellow-100 text-yellow-700"
+                        }
                     `}
+                    >
+
+                      {reserva.estado}
+
+                    </span>
+
+                  </td>
+
+                  <td
+                    className={`${td} font-semibold`}
                   >
+                    Bs. {reserva.total_pago}
+                  </td>
 
-                    {reserva.estado}
+                  {/* BOTONES */}
 
-                  </span>
+                  <td className={td}>
 
-                </td>
-
-                <td
-                  className={`${td} font-semibold`}
-                >
-                  Bs. {reserva.total_pago}
-                </td>
-
-                {/* BOTONES */}
-
-                <td className={td}>
-
-                  <div
-                    className="
+                    <div
+                      className="
                       flex
                       flex-wrap
                       gap-2
                     "
-                  >
-
-                    <ActionButton
-                      color="green"
-                      onClick={() =>
-                        cambiarEstado(
-                          reserva.id_reserva,
-                          "confirmado"
-                        )
-                      }
                     >
-                      Confirmar
-                    </ActionButton>
 
-                    <ActionButton
-                      color="red"
-                      onClick={() =>
-                        cambiarEstado(
-                          reserva.id_reserva,
-                          "cancelado"
-                        )
-                      }
-                    >
-                      Cancelar
-                    </ActionButton>
+                      <ActionButton
+                        color="green"
+                        onClick={() =>
+                          cambiarEstado(
+                            reserva.id_reserva,
+                            "confirmado"
+                          )
+                        }
+                      >
+                        Confirmar
+                      </ActionButton>
 
-                    <ActionButton
-                      onClick={() =>
-                        eliminar(
-                          reserva.id_reserva
-                        )
-                      }
-                    >
-                      Eliminar
-                    </ActionButton>
+                      <ActionButton
+                        color="red"
+                        onClick={() =>
+                          cambiarEstado(
+                            reserva.id_reserva,
+                            "cancelado"
+                          )
+                        }
+                      >
+                        Cancelar
+                      </ActionButton>
 
-                  </div>
+                      <ActionButton
+                        onClick={() =>
+                          eliminar(
+                            reserva.id_reserva
+                          )
+                        }
+                      >
+                        Eliminar
+                      </ActionButton>
 
-                </td>
+                    </div>
 
-              </tr>
+                  </td>
 
-            ))}
+                </tr>
+
+              ))}
 
           </tbody>
 

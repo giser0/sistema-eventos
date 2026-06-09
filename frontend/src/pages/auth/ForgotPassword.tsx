@@ -7,38 +7,38 @@ function ForgotPassword() {
     useState("");
 
   const handleSubmit = async (
-  e: React.FormEvent
-) => {
+    e: React.FormEvent
+  ) => {
 
-  e.preventDefault();
+    e.preventDefault();
 
-  try {
+    try {
 
-    await api.post(
+      await api.post(
 
-      "/auth/forgot-password",
+        "/auth/forgot-password",
 
-      {
-        email
-      }
+        {
+          email
+        }
 
-    );
+      );
 
-    alert(
-      "Se envió el enlace de recuperación"
-    );
+      alert(
+        "Se envió el enlace de recuperación"
+      );
 
-  } catch (error) {
+    } catch (error) {
 
-    console.log(error);
+      console.log(error);
 
-    alert(
-      "Error al enviar correo"
-    );
+      alert(
+        "Error al enviar correo"
+      );
 
-  }
+    }
 
-};
+  };
 
   return (
 

@@ -11,21 +11,21 @@ import Reservations from "../pages/admin/Reservations";
 import Users from "../pages/admin/Users";
 
 import Payments
-from "../pages/admin/Payments";
+  from "../pages/admin/Payments";
 
 import NewBooking
-from "../pages/user/NewBooking";
+  from "../pages/user/NewBooking";
 
 import MyBookings
-from "../pages/user/MyBookings";
+  from "../pages/user/MyBookings";
 
 import Profile
-from "../pages/user/Profile";
+  from "../pages/user/Profile";
 
 import Logs from "../pages/admin/Logs";
 
 import NewReservationAdmin
-from "../pages/admin/NewReservationAdmin";
+  from "../pages/admin/NewReservationAdmin";
 
 import Home from "../pages/public/Home";
 
@@ -38,10 +38,10 @@ function AppRoutes() {
   return (
 
     <Routes>
-    <Route
-      path="/"
-      element={<Home />}
-    />
+      <Route
+        path="/"
+        element={<Home />}
+      />
       {/* Auth */}
       <Route path="/login" element={<Login />} />
 
@@ -50,22 +50,22 @@ function AppRoutes() {
         element={<Register />}
       />
       <Route
-  path="/forgot-password"
-  element={<ForgotPassword />}
-/>
+        path="/forgot-password"
+        element={<ForgotPassword />}
+      />
 
-<Route
-  path="/reset-password/:token"
-  element={<ResetPassword />}
-/>
-<Route
-  path="/admin/logs"
-  element={
-    <ProtectedRoute role="admin">
-      <Logs />
-    </ProtectedRoute>
-  }
-/>
+      <Route
+        path="/reset-password/:token"
+        element={<ResetPassword />}
+      />
+      <Route
+        path="/admin/logs"
+        element={
+          <ProtectedRoute role="admin">
+            <Logs />
+          </ProtectedRoute>
+        }
+      />
       {/* Admin */}
       <Route
         path="/admin/dashboard"
@@ -98,16 +98,16 @@ function AppRoutes() {
           <ProtectedRoute role="admin">
             <Users />
           </ProtectedRoute>
-      }
-    />
+        }
+      />
       <Route
-  path="/admin/pagos"
-  element={
-    <ProtectedRoute role="admin">
-      <Payments />
-    </ProtectedRoute>
-  }
-/>
+        path="/admin/pagos"
+        element={
+          <ProtectedRoute role="admin">
+            <Payments />
+          </ProtectedRoute>
+        }
+      />
 
       {/* User */}
       <Route
@@ -119,39 +119,39 @@ function AppRoutes() {
         }
       />
       <Route
-  path="/user/new-booking"
-  element={
-    <ProtectedRoute role="cliente">
-      <NewBooking />
-    </ProtectedRoute>
-  }
-/>
+        path="/user/new-booking"
+        element={
+          <ProtectedRoute role="cliente">
+            <NewBooking />
+          </ProtectedRoute>
+        }
+      />
 
-<Route
-  path="/user/my-bookings"
-  element={
-    <ProtectedRoute role="cliente">
-      <MyBookings />
-    </ProtectedRoute>
-  }
-/>
+      <Route
+        path="/user/my-bookings"
+        element={
+          <ProtectedRoute role="cliente">
+            <MyBookings />
+          </ProtectedRoute>
+        }
+      />
 
-<Route
-  path="/user/profile"
-  element={
-    <ProtectedRoute role="cliente">
-      <Profile />
-    </ProtectedRoute>
-  }
-/>
-<Route
-  path="/admin/locales"
-  element={
-    <ProtectedRoute role="admin">
-      <Locales />
-    </ProtectedRoute>
-  }
-/>
+      <Route
+        path="/user/profile"
+        element={
+          <ProtectedRoute role="cliente">
+            <Profile />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/admin/locales"
+        element={
+          <ProtectedRoute role="admin">
+            <Locales />
+          </ProtectedRoute>
+        }
+      />
     </Routes>
 
   );

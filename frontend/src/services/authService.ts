@@ -14,64 +14,64 @@ interface RegisterData {
 
 // LOGIN
 export const loginUser =
-async (data: LoginData) => {
+  async (data: LoginData) => {
 
-  const response =
-    await api.post(
-      "/auth/login",
-      data
-    );
+    const response =
+      await api.post(
+        "/auth/login",
+        data
+      );
 
-  return response.data;
+    return response.data;
 
-};
+  };
 
 // REGISTER
 export const registerUser =
-async (data: RegisterData) => {
+  async (data: RegisterData) => {
 
-  const response =
-    await api.post(
-      "/usuarios",
-      data
-    );
+    const response =
+      await api.post(
+        "/usuarios",
+        data
+      );
 
-  return response.data;
+    return response.data;
 
-};
+  };
 export const resetPassword =
-async (
+  async (
 
-  email: string,
-  password: string
+    email: string,
+    password: string
 
-) => {
+  ) => {
 
-  const response =
-    await api.patch(
+    const response =
+      await api.patch(
 
-      "/auth/reset-password",
+        "/auth/reset-password",
 
-      {
-        email,
-        password
-      }
+        {
+          email,
+          password
+        }
 
-    );
+      );
 
-  return response.data;
+    return response.data;
 
-};
+  };
 
 // LOGOUT
 export const logoutUser =
-async () => {
+  async () => {
 
-  const response =
-    await api.post(
-      "/auth/logout"
-    );
+    const response =
+      await api.post(
+        "/auth/logout"
+      );
 
-  return response.data;
+    return response.data;
 
-};
+  };

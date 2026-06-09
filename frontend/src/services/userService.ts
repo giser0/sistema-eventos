@@ -1,6 +1,6 @@
 import api from "./api";
 
-// ✅ obtener usuarios
+// obtener usuarios
 export const obtenerUsuarios =
   async () => {
 
@@ -9,9 +9,9 @@ export const obtenerUsuarios =
 
     return response.data;
 
-};
+  };
 
-// ✅ crear usuario
+// crear usuario
 export const crearUsuario =
   async (data: any) => {
 
@@ -23,9 +23,9 @@ export const crearUsuario =
 
     return response.data;
 
-};
+  };
 
-// ✅ desactivar usuario
+//  desactivar usuario
 export const eliminarUsuario =
   async (id: number) => {
 
@@ -36,9 +36,9 @@ export const eliminarUsuario =
 
     return response.data;
 
-};
+  };
 
-// ✅ editar usuario
+//  editar usuario
 export const editarUsuario =
   async (
     id: number,
@@ -53,4 +53,4 @@ export const editarUsuario =
 
     return response.data;
 
-};
+  };

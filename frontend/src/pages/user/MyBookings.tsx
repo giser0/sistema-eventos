@@ -1,19 +1,19 @@
 import { useEffect, useState } from "react";
 
 import UserLayout
-from "../../layouts/UserLayout";
+  from "../../layouts/UserLayout";
 
 import {
   obtenerMisReservas,
   eliminarReserva
 }
-from "../../services/reservationService";
+  from "../../services/reservationService";
 
 import {
   crearPago,
   descargarComprobantePDF
 }
-from "../../services/paymentService";
+  from "../../services/paymentService";
 
 function MyBookings() {
 
@@ -49,7 +49,7 @@ function MyBookings() {
 
       }
 
-  };
+    };
 
   // ✅ ELIMINAR
   const eliminarMiReserva =
@@ -82,7 +82,7 @@ function MyBookings() {
 
       }
 
-  };
+    };
 
   // ✅ PAGAR
   const pagarReserva =
@@ -91,21 +91,21 @@ function MyBookings() {
       try {
 
         console.log("RESERVA", reserva);
-console.log("TOTAL", reserva.total_pago);
+        console.log("TOTAL", reserva.total_pago);
 
-const pago =
-  await crearPago({
+        const pago =
+          await crearPago({
 
-    id_reserva:
-      Number(reserva.id_reserva),
+            id_reserva:
+              Number(reserva.id_reserva),
 
-    monto:
-      Number(reserva.total_pago),
+            monto:
+              Number(reserva.total_pago),
 
-    metodo:
-      "efectivo",
+            metodo:
+              "efectivo",
 
-  });
+          });
 
         alert(
           "Pago realizado correctamente"
@@ -119,22 +119,22 @@ const pago =
 
       } catch (error: any) {
 
-  console.log(error);
+        console.log(error);
 
-  console.log(
-    "ERROR BACKEND:",
-    error?.response?.data
-  );
+        console.log(
+          "ERROR BACKEND:",
+          error?.response?.data
+        );
 
-  alert(
-    JSON.stringify(
-      error?.response?.data
-    )
-  );
+        alert(
+          JSON.stringify(
+            error?.response?.data
+          )
+        );
 
-}
+      }
 
-  };
+    };
 
   return (
 
@@ -391,14 +391,13 @@ const pago =
                             text-xs
                             font-semibold
 
-                            ${
-                              reserva.estado ===
+                            ${reserva.estado ===
                               "confirmado"
 
-                                ? "bg-green-100 text-green-700"
+                              ? "bg-green-100 text-green-700"
 
-                                : reserva.estado ===
-                                  "cancelado"
+                              : reserva.estado ===
+                                "cancelado"
 
                                 ? "bg-red-100 text-red-700"
 
@@ -447,12 +446,12 @@ const pago =
                           {
                             reserva.servicios?.length > 0
 
-                            ? reserva.servicios.map(
+                              ? reserva.servicios.map(
                                 (item: any) => (
 
-                                <span
-                                  key={item.id}
-                                  className="
+                                  <span
+                                    key={item.id}
+                                    className="
                                   bg-slate-100
                                   px-3
                                   py-1
@@ -460,26 +459,26 @@ const pago =
                                   text-xs
                                   w-fit
                                 "
-                                >
-                                  {
-                                    item.servicio?.nombre
-                                  }
-                                </span>
+                                  >
+                                    {
+                                      item.servicio?.nombre
+                                    }
+                                  </span>
 
-                              ))
+                                ))
 
-                            : (
+                              : (
 
-                              <span
-                                className="
+                                <span
+                                  className="
                                 text-slate-400
                                 text-sm
                               "
-                              >
-                                Sin servicios
-                              </span>
+                                >
+                                  Sin servicios
+                                </span>
 
-                            )
+                              )
                           }
 
                         </div>

@@ -4,7 +4,7 @@ import {
 } from "react";
 
 import AdminLayout
-from "../../layouts/AdminLayout";
+  from "../../layouts/AdminLayout";
 
 import {
   obtenerLogs
@@ -37,7 +37,7 @@ function Logs() {
 
       }
 
-  };
+    };
 
   return (
 
