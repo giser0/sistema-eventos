@@ -90,19 +90,22 @@ function MyBookings() {
 
       try {
 
-        const pago =
-          await crearPago({
+        console.log("RESERVA", reserva);
+console.log("TOTAL", reserva.total_pago);
 
-            id_reserva:
-              reserva.id_reserva,
+const pago =
+  await crearPago({
 
-            monto:
-              reserva.total_pago,
+    id_reserva:
+      Number(reserva.id_reserva),
 
-            metodo:
-              "efectivo",
+    monto:
+      Number(reserva.total_pago),
 
-          });
+    metodo:
+      "efectivo",
+
+  });
 
         alert(
           "Pago realizado correctamente"
