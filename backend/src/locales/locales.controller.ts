@@ -8,10 +8,10 @@ import {
   UseGuards
 } from '@nestjs/common';
 
+import { AuthGuard } from '@nestjs/passport';
+
 import { LocalesService } from './locales.service';
 import { UpdateLocalDto } from './dto/update-local.dto';
-import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
-
 @Controller('locales')
 export class LocalesController {
 
@@ -39,7 +39,7 @@ export class LocalesController {
     return this.localesService.crearLocal(body);
   }
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(AuthGuard('jwt'))
   @Patch(':id')
   editarLocal(
     @Param('id') id: string,

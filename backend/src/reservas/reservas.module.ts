@@ -10,21 +10,12 @@ import { ReservasService } from './reservas.service';
 
 import { Reserva } from './entities/reserva/reserva';
 
+
 @Module({
 
   imports: [
 
     TypeOrmModule.forFeature([Reserva]),
-
-    JwtModule.register({
-
-      secret: 'mi_clave_secreta',
-
-      signOptions: {
-        expiresIn: '1d'
-      }
-
-    })
 
   ],
 

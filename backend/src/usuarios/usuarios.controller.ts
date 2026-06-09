@@ -10,7 +10,7 @@ import {
 } from '@nestjs/common';
 
 import { UsuariosService } from './usuarios.service';
-import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('usuarios')
 export class UsuariosController {
@@ -32,7 +32,7 @@ export class UsuariosController {
   }
 
   // ✅ PERFIL
-  @UseGuards(JwtAuthGuard)
+ @UseGuards(AuthGuard('jwt'))
   @Get('perfil')
   obtenerPerfil(@Req() request: any) {
     return this.usuariosService.obtenerPerfil(
@@ -41,7 +41,7 @@ export class UsuariosController {
   }
 
   // ✅ EDITAR PERFIL
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(AuthGuard('jwt'))
   @Patch('perfil')
   editarPerfil(
     @Req() request: any,
@@ -54,7 +54,7 @@ export class UsuariosController {
   }
 
   // ✅ CAMBIAR PASSWORD
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(AuthGuard('jwt'))
   @Patch('cambiar-password')
   cambiarPassword(
     @Req() request: any,
