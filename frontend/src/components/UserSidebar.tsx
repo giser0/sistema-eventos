@@ -16,7 +16,7 @@ function UserSidebar() {
     <aside className="w-64 bg-slate-950 text-white min-h-screen p-6 border-r border-slate-800">
 
       <h2 className="text-2xl font-bold text-yellow-400 mb-10">
-        Los pinos (cliente)
+        Salon imperial (cliente)
       </h2>
 
       <nav>
