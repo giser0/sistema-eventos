@@ -22,7 +22,7 @@ export class Local {
     @Column()
     capacidad!: number;
 
-    // 🔥 precio del local
+    //  precio del local
     @Column('decimal', {
         precision: 10,
         scale: 2,

@@ -10,7 +10,7 @@ import {
 import { Pago } from './entities/pago';
 
 import { Reserva }
-from 'src/reservas/entities/reserva/reserva';
+    from 'src/reservas/entities/reserva/reserva';
 
 import PDFDocument from 'pdfkit';
 
@@ -25,9 +25,9 @@ export class PagosService {
         @InjectRepository(Reserva)
         private reservaRepo: Repository<Reserva>
 
-    ) {}
+    ) { }
 
-    // 🔥 CREAR PAGO
+    //  CREAR PAGO
     async crear(data: any) {
 
         // buscar reserva
@@ -84,7 +84,7 @@ export class PagosService {
 
     }
 
-    // 🔥 OBTENER PAGOS
+    //  OBTENER PAGOS
     findAll() {
 
         return this.repo.find({
@@ -92,7 +92,7 @@ export class PagosService {
             where: {
                 estado: Not('eliminado')
             },
-            
+
 
             relations: {
 
@@ -103,16 +103,16 @@ export class PagosService {
             },
 
             order: {
-                
+
                 fecha_pago: 'DESC'
             }
-            
+
 
         });
 
     }
 
-    // 🔥 ELIMINAR PAGO
+    //  ELIMINAR PAGO
     async eliminarPago(
         id_pago: number
     ) {
@@ -143,7 +143,7 @@ export class PagosService {
 
     }
 
-    // 🔥 GENERAR PDF
+    //  GENERAR PDF
     async generarComprobante(
         id: number
     ): Promise<Buffer> {
@@ -213,14 +213,12 @@ export class PagosService {
             doc.moveDown();
 
             doc.text(
-                `Cliente: ${
-                    pago.reserva?.usuario?.nombre
+                `Cliente: ${pago.reserva?.usuario?.nombre
                 }`
             );
 
             doc.text(
-                `Reserva ID: ${
-                    pago.reserva?.id_reserva
+                `Reserva ID: ${pago.reserva?.id_reserva
                 }`
             );
 
@@ -237,10 +235,9 @@ export class PagosService {
             );
 
             doc.text(
-                `Fecha: ${
-                    new Date(
-                        pago.fecha_pago
-                    ).toLocaleString()
+                `Fecha: ${new Date(
+                    pago.fecha_pago
+                ).toLocaleString()
                 }`
             );
 

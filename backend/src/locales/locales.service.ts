@@ -11,7 +11,7 @@ export class LocalesService {
   constructor(
     @InjectRepository(Local)
     private localRepository: Repository<Local>
-  ) {}
+  ) { }
 
   obtenerLocales() {
     return this.localRepository.find();
@@ -22,7 +22,7 @@ export class LocalesService {
     return this.localRepository.save(nuevo);
   }
 
-  // ✏️ EDITAR LOCAL
+  //  EDITAR LOCAL
   async editarLocal(
     id_local: number,
     data: UpdateLocalDto
@@ -35,34 +35,34 @@ export class LocalesService {
       throw new BadRequestException('Local no encontrado');
     }
 
-   if (data.nombre !== undefined)
-  local.nombre = data.nombre;
+    if (data.nombre !== undefined)
+      local.nombre = data.nombre;
 
-if (data.direccion !== undefined)
-  local.direccion = data.direccion;
+    if (data.direccion !== undefined)
+      local.direccion = data.direccion;
 
-if (data.telefono !== undefined)
-  local.telefono = data.telefono;
+    if (data.telefono !== undefined)
+      local.telefono = data.telefono;
 
-if (data.capacidad !== undefined)
-  local.capacidad = data.capacidad;
+    if (data.capacidad !== undefined)
+      local.capacidad = data.capacidad;
 
-if (data.precio !== undefined)
-  local.precio = data.precio;
+    if (data.precio !== undefined)
+      local.precio = data.precio;
     return this.localRepository.save(local);
   }
   async obtenerLocalPorId(id_local: number) {
 
-  const local = await this.localRepository.findOne({
-    where: { id_local }
-  });
+    const local = await this.localRepository.findOne({
+      where: { id_local }
+    });
 
-  if (!local) {
-    throw new BadRequestException(
-      'Local no encontrado'
-    );
+    if (!local) {
+      throw new BadRequestException(
+        'Local no encontrado'
+      );
+    }
+
+    return local;
   }
-
-  return local;
-}
 }

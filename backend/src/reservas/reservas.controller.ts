@@ -23,37 +23,37 @@ const PDFDocument = require('pdfkit');
 export class ReservasController {
   constructor(
     private readonly reservasService: ReservasService,
-  ) {}
+  ) { }
 
-  // 🔥 TODAS LAS RESERVAS (ADMIN)
+  //  TODAS LAS RESERVAS (ADMIN)
   @Get()
   obtenerReservas() {
     return this.reservasService.obtenerReservas();
   }
 
-  // 🔥 DASHBOARD
+  //  DASHBOARD
   @Get('dashboard')
   obtenerDashboard() {
     return this.reservasService.obtenerDashboard();
   }
 
-  // 🔥 PENDIENTES DE PAGO
+  //  PENDIENTES DE PAGO
   @Get('pendientes-pago')
   obtenerPendientesPago() {
     return this.reservasService.obtenerPendientesPago();
   }
 
-  // 🔥 MIS RESERVAS (CLIENTE)
+  //  MIS RESERVAS (CLIENTE)
   @Get('mis-reservas')
   obtenerMisReservas(
     @Req() request: Request & { user: any },
   ) {
     return this.reservasService.obtenerMisReservas(
-      request.user.id, // 🔥 USUARIO DEL TOKEN
+      request.user.id, //  USUARIO DEL TOKEN
     );
   }
 
-  // 🔥 CREAR RESERVA (CLIENTE)
+  //  CREAR RESERVA (CLIENTE)
   @Post()
   crearReserva(
     @Req() request: Request & { user: any },
@@ -61,11 +61,11 @@ export class ReservasController {
   ) {
     return this.reservasService.crearReserva({
       ...body,
-      usuario: request.user.id, // 🔥 CLAVE
+      usuario: request.user.id, //  CLAVE
     });
   }
 
-  // 🔥 CAMBIAR ESTADO (ADMIN)
+  //  CAMBIAR ESTADO (ADMIN)
   @Patch(':id')
   cambiarEstado(
     @Param('id') id: string,
@@ -77,7 +77,7 @@ export class ReservasController {
     );
   }
 
-  // 🔥 ELIMINAR (LÓGICO)
+  //  ELIMINAR (LÓGICO)
   @Patch('eliminar/:id')
   eliminarReserva(
     @Param('id') id: string,
@@ -87,7 +87,7 @@ export class ReservasController {
     );
   }
 
-  // 🔥 PDF (ADMIN)
+  //  PDF (ADMIN)
   @Get('reporte/pdf')
   async generarPDF(
     @Res() response: Response,

@@ -18,43 +18,43 @@ export class ReservasService {
     constructor(
         @InjectRepository(Reserva)
         private reservaRepository: Repository<Reserva>
-    ) {}
+    ) { }
 
-   // 🔥 TODAS LAS RESERVAS
-obtenerReservas() {
+    // 🔥 TODAS LAS RESERVAS
+    obtenerReservas() {
 
-    return this.reservaRepository.find({
+        return this.reservaRepository.find({
 
-        where: {
+            where: {
 
-            estado: Not('eliminado')
-
-        },
-        order: {
-             id_reserva: 'DESC'
-        },
-
-        relations: {
-
-            usuario: true,
-
-            local: true,
-
-            servicios: {
-
-                servicio: true
+                estado: Not('eliminado')
 
             },
+            order: {
+                id_reserva: 'DESC'
+            },
 
-            pagos: true
+            relations: {
 
-        }
+                usuario: true,
 
-    });
+                local: true,
 
-}
+                servicios: {
 
-    // 🔥 MIS RESERVAS
+                    servicio: true
+
+                },
+
+                pagos: true
+
+            }
+
+        });
+
+    }
+
+    //  MIS RESERVAS
     obtenerMisReservas(id_usuario: number) {
         return this.reservaRepository.find({
             where: {
@@ -63,7 +63,7 @@ obtenerReservas() {
             },
             order: {
                 id_reserva: 'DESC'
-                
+
             },
             relations: {
                 usuario: true,
@@ -76,18 +76,18 @@ obtenerReservas() {
         });
     }
 
-    // 🔥 CREAR RESERVA
+    //  CREAR RESERVA
     async crearReserva(reserva: Partial<Reserva>) {
 
-      const reservaExistente =
-    await this.reservaRepository.findOne({
+        const reservaExistente =
+            await this.reservaRepository.findOne({
 
-        where: {
-            fecha_evento: reserva.fecha_evento,
-            estado: Not('eliminado')
-        }
+                where: {
+                    fecha_evento: reserva.fecha_evento,
+                    estado: Not('eliminado')
+                }
 
-    });
+            });
         if (reservaExistente) {
             throw new BadRequestException(
                 'Ya existe una reserva en esa fecha'
@@ -102,7 +102,7 @@ obtenerReservas() {
         );
     }
 
-    // 🔥 CAMBIAR ESTADO
+    //  CAMBIAR ESTADO
     async cambiarEstado(
         id_reserva: number,
         estado: string
@@ -120,106 +120,106 @@ obtenerReservas() {
 
         return await this.reservaRepository.save(reserva);
     }
-    // 🔥 ELIMINAR RESERVA (LÓGICO)
-async eliminarReserva(
-    id_reserva: number
-) {
+    //  ELIMINAR RESERVA (LÓGICO)
+    async eliminarReserva(
+        id_reserva: number
+    ) {
 
-    const reserva =
-        await this.reservaRepository.findOne({
-            where: { id_reserva }
-        });
+        const reserva =
+            await this.reservaRepository.findOne({
+                where: { id_reserva }
+            });
 
-    if (!reserva) {
+        if (!reserva) {
 
-        throw new Error(
-            'Reserva no encontrada'
+            throw new Error(
+                'Reserva no encontrada'
+            );
+
+        }
+
+        reserva.estado = 'eliminado';
+
+        return await this.reservaRepository.save(
+            reserva
         );
 
     }
+    //  RESERVAS PENDIENTES DE PAGO
+    async obtenerPendientesPago() {
 
-    reserva.estado = 'eliminado';
+        const reservas =
+            await this.reservaRepository.find({
 
-    return await this.reservaRepository.save(
-        reserva
-    );
+                relations: {
+                    usuario: true,
+                    pagos: true
+                }
 
-}
-// 🔥 RESERVAS PENDIENTES DE PAGO
-async obtenerPendientesPago() {
 
-    const reservas =
-        await this.reservaRepository.find({
+            });
 
-            relations: {
-                usuario: true,
-                pagos: true
-            }
-            
+        // solo reservas SIN pagos
+        return reservas.filter(
+            reserva =>
+                !reserva.pagos ||
+                reserva.pagos.length === 0
+        );
 
+    }
+    //  DASHBOARD
+
+    //  DASHBOARD
+    async obtenerDashboard() {
+
+        const total_reservas =
+            await this.reservaRepository.count({
+                where: {
+                    estado: Not('eliminado')
+                }
+            });
+
+        const pendientes =
+            await this.reservaRepository.count({
+                where: {
+                    estado: 'pendiente'
+                }
+            });
+
+        const confirmadas =
+            await this.reservaRepository.count({
+                where: {
+                    estado: 'confirmado'
+                }
+            });
+
+        const canceladas =
+            await this.reservaRepository.count({
+                where: {
+                    estado: 'cancelado'
+                }
+            });
+
+        const reservas =
+            await this.reservaRepository.find({
+                where: {
+                    estado: Not('eliminado')
+                }
+            });
+
+        let ingresos_totales = 0;
+
+        reservas.forEach(reserva => {
+            ingresos_totales +=
+                Number(reserva.total_pago || 0);
         });
 
-    // solo reservas SIN pagos
-    return reservas.filter(
-        reserva =>
-            !reserva.pagos ||
-            reserva.pagos.length === 0
-    );
-
-}
-    // 🔥 DASHBOARD
-    
-   // 🔥 DASHBOARD
-async obtenerDashboard() {
-
-    const total_reservas =
-        await this.reservaRepository.count({
-            where: {
-                estado: Not('eliminado')
-            }
-        });
-
-    const pendientes =
-        await this.reservaRepository.count({
-            where: {
-                estado: 'pendiente'
-            }
-        });
-
-    const confirmadas =
-        await this.reservaRepository.count({
-            where: {
-                estado: 'confirmado'
-            }
-        });
-
-    const canceladas =
-        await this.reservaRepository.count({
-            where: {
-                estado: 'cancelado'
-            }
-        });
-
-    const reservas =
-        await this.reservaRepository.find({
-            where: {
-                estado: Not('eliminado')
-            }
-        });
-
-    let ingresos_totales = 0;
-
-    reservas.forEach(reserva => {
-        ingresos_totales +=
-            Number(reserva.total_pago || 0);
-    });
-
-    return {
-        total_reservas,
-        pendientes,
-        confirmadas,
-        canceladas,
-        ingresos_totales
-    };
-}
+        return {
+            total_reservas,
+            pendientes,
+            confirmadas,
+            canceladas,
+            ingresos_totales
+        };
+    }
 }

@@ -9,4 +9,4 @@ import { ServiciosExtraService } from './servicios-extra.service';
   controllers: [ServiciosExtraController],
   providers: [ServiciosExtraService],
 })
-export class ServiciosExtraModule {}
+export class ServiciosExtraModule { }

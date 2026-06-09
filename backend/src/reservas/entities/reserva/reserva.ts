@@ -10,14 +10,14 @@ import {
 import { Local } from 'src/locales/entities/local/local';
 
 import { ReservaServicio }
-from 'src/reserva-servicio/entities/reserva-servicio';
+    from 'src/reserva-servicio/entities/reserva-servicio';
 
 import { Pago }
-from 'src/pagos/entities/pago';
+    from 'src/pagos/entities/pago';
 
 
 import { Usuario }
-from 'src/usuarios/entities/usuario/usuario';
+    from 'src/usuarios/entities/usuario/usuario';
 
 @Entity('reservas')
 export class Reserva {
@@ -67,7 +67,7 @@ export class Reserva {
     })
     total_pago!: number;
 
-    // 🔥 RELACIÓN USUARIO
+    //  RELACIÓN USUARIO
     @ManyToOne(() => Usuario)
 
     @JoinColumn({
@@ -76,7 +76,7 @@ export class Reserva {
 
     usuario!: Usuario;
 
-    // 🔥 RELACIÓN LOCAL
+    //  RELACIÓN LOCAL
     @ManyToOne(() => Local)
 
     @JoinColumn({
@@ -85,7 +85,7 @@ export class Reserva {
 
     local!: Local;
 
-    // 🔥 SERVICIOS EXTRA
+    //  SERVICIOS EXTRA
     @OneToMany(
         () => ReservaServicio,
         reservaServicio =>
@@ -94,7 +94,7 @@ export class Reserva {
 
     servicios!: ReservaServicio[];
 
-    // 🔥 PAGOS
+    //  PAGOS
     @OneToMany(
         () => Pago,
         pago => pago.reserva

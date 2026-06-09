@@ -20,7 +20,7 @@ import { LogAcceso } from '../logs-acceso/entities/log-acceso';
 export class AuthService {
 
   constructor(
-    
+
     @InjectRepository(Usuario)
     private usuarioRepository: Repository<Usuario>,
 
@@ -30,29 +30,29 @@ export class AuthService {
     private jwtService: JwtService
   ) {
     console.log('EMAIL_USER:', process.env.EMAIL_USER);
-console.log('EMAIL_PASS:', process.env.EMAIL_PASS ? 'OK' : 'VACIO');
+    console.log('EMAIL_PASS:', process.env.EMAIL_PASS ? 'OK' : 'VACIO');
     this.transporter.verify()
       .then(() => console.log('Correo conectado correctamente'))
       .catch(err => console.log(err));
   }
 
-  // 🔥 TRANSPORTER
-  
+  //  TRANSPORTER
+
   private transporter = nodemailer.createTransport({
-  host: 'smtp.gmail.com',
-  port: 587,
-  secure: false,
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
-    
-  },
-  
-  
-});
+    host: 'smtp.gmail.com',
+    port: 587,
+    secure: false,
+    auth: {
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASS,
+
+    },
 
 
-  // 🔐 LOGIN
+  });
+
+
+  //  LOGIN
   async login(
     email: string,
     password: string,
@@ -65,9 +65,9 @@ console.log('EMAIL_PASS:', process.env.EMAIL_PASS ? 'OK' : 'VACIO');
     if (!usuario) {
       throw new UnauthorizedException('Credenciales inválidas');
     }
-this.transporter.verify()
-  .then(() => console.log('SMTP OK'))
-  .catch(err => console.log('SMTP ERROR', err));
+    this.transporter.verify()
+      .then(() => console.log('SMTP OK'))
+      .catch(err => console.log('SMTP ERROR', err));
     const passwordValida = await bcrypt.compare(
       password,
       usuario.password
@@ -114,7 +114,7 @@ this.transporter.verify()
     };
   }
 
-  // 🔓 LOGOUT
+  //  LOGOUT
   async logout(request: any) {
     const authHeader = request.headers.authorization;
     if (!authHeader) {
@@ -134,7 +134,7 @@ this.transporter.verify()
     return { mensaje: 'Logout correcto' };
   }
 
-  // 🔥 FORGOT PASSWORD
+  //  FORGOT PASSWORD
   async forgotPassword(email: string) {
     const usuario = await this.usuarioRepository.findOne({
       where: { email }
@@ -164,7 +164,7 @@ this.transporter.verify()
     return { mensaje: 'Correo enviado correctamente' };
   }
 
-  // 🔥 RESET PASSWORD
+  //  RESET PASSWORD
   async resetPassword(token: string, password: string) {
     const payload = this.jwtService.verify(token);
 
@@ -183,20 +183,20 @@ this.transporter.verify()
     return { mensaje: 'Contraseña actualizada correctamente' };
   }
   async buscarPorEmail(email: string) {
-  const usuario = await this.usuarioRepository.findOne({
-    where: { email }
-  });
+    const usuario = await this.usuarioRepository.findOne({
+      where: { email }
+    });
 
-  if (!usuario) {
-    throw new UnauthorizedException('Usuario no encontrado');
+    if (!usuario) {
+      throw new UnauthorizedException('Usuario no encontrado');
+    }
+
+    return {
+      id: usuario.id_usuario,
+      nombre: usuario.nombre,
+      email: usuario.email,
+      telefono: usuario.telefono,
+      rol: usuario.rol
+    };
   }
-
-  return {
-    id: usuario.id_usuario,
-    nombre: usuario.nombre,
-    email: usuario.email,
-    telefono: usuario.telefono,
-    rol: usuario.rol
-  };
-}
 }

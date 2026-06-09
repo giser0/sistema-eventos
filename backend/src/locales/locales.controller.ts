@@ -17,14 +17,14 @@ export class LocalesController {
 
   constructor(
     private readonly localesService: LocalesService
-  ) {}
+  ) { }
 
   @Get()
   obtenerLocales() {
     return this.localesService.obtenerLocales();
   }
 
-  // 🔥 NUEVO
+  //  NUEVO
   @Get(':id')
   obtenerLocalPorId(
     @Param('id') id: string

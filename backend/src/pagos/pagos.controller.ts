@@ -8,13 +8,13 @@ import {
   Patch
 } from '@nestjs/common';
 import { CreatePagoDto }
-from './dto/create-pago.dto';
+  from './dto/create-pago.dto';
 import type {
   Response
 } from 'express';
 
 import { PagosService }
-from './pagos.service';
+  from './pagos.service';
 
 @Controller('pagos')
 
@@ -22,21 +22,21 @@ export class PagosController {
 
   constructor(
     private service: PagosService
-  ) {}
+  ) { }
 
-  // 🔥 CREAR
+  //  CREAR
   @Post()
 
   crear(
-  @Body()
-  body: CreatePagoDto
-) {
+    @Body()
+    body: CreatePagoDto
+  ) {
 
     return this.service.crear(body);
 
   }
 
-  // 🔥 LISTAR
+  //  LISTAR
   @Get()
 
   findAll() {
@@ -45,7 +45,7 @@ export class PagosController {
 
   }
 
-  // 🔥 ELIMINAR
+  //  ELIMINAR
   @Patch('eliminar/:id')
 
   eliminarPago(
@@ -61,7 +61,7 @@ export class PagosController {
 
   }
 
-  // 🔥 PDF
+  //  PDF
   @Get('comprobante/:id')
 
   async generarComprobante(

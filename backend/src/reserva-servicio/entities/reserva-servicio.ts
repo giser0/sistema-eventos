@@ -9,9 +9,9 @@ export class ReservaServicio {
     id!: number;
 
     @ManyToOne(
-    () => Reserva,
-    reserva => reserva.servicios
-)
+        () => Reserva,
+        reserva => reserva.servicios
+    )
 
     @JoinColumn({
         name: 'id_reserva'

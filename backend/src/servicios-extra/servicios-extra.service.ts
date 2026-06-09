@@ -9,7 +9,7 @@ export class ServiciosExtraService {
     constructor(
         @InjectRepository(ServicioExtra)
         private repo: Repository<ServicioExtra>
-    ) {}
+    ) { }
 
     findAll() {
         return this.repo.find();

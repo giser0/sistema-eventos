@@ -13,7 +13,7 @@ export class ServicioExtra {
     @Column()
     nombre!: string;
 
-    // 🔥 precio del servicio
+    //  precio del servicio
     @Column('decimal', {
         precision: 10,
         scale: 2

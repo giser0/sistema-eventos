@@ -31,4 +31,4 @@ import { PagosService } from './pagos.service';
 
 })
 
-export class PagosModule {}
+export class PagosModule { }

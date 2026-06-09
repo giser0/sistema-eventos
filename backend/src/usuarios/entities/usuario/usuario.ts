@@ -35,14 +35,14 @@ export class Usuario {
     })
     activo!: boolean;
     @Column({
-  nullable: true
-})
-resetToken!: string;
+        nullable: true
+    })
+    resetToken!: string;
 
-@Column({
-  nullable: true,
-  type: 'timestamp'
-})
-resetTokenExpiration!: Date;
+    @Column({
+        nullable: true,
+        type: 'timestamp'
+    })
+    resetTokenExpiration!: Date;
 
 }

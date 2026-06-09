@@ -9,9 +9,9 @@ import { AuthModule } from '../auth/auth.module'; // 👈 IMPORTANTE
 @Module({
   imports: [
     TypeOrmModule.forFeature([Local]),
-    AuthModule, // 👈 CLAVE ABSOLUTA
+    AuthModule,
   ],
   controllers: [LocalesController],
   providers: [LocalesService],
 })
-export class LocalesModule {}
+export class LocalesModule { }

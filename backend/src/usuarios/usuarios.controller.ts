@@ -17,7 +17,7 @@ export class UsuariosController {
 
   constructor(
     private readonly usuariosService: UsuariosService
-  ) {}
+  ) { }
 
   @Post()
   crearUsuario(
@@ -31,8 +31,8 @@ export class UsuariosController {
     return this.usuariosService.obtenerTodos();
   }
 
-  // ✅ PERFIL
- @UseGuards(AuthGuard('jwt'))
+  //  PERFIL
+  @UseGuards(AuthGuard('jwt'))
   @Get('perfil')
   obtenerPerfil(@Req() request: any) {
     return this.usuariosService.obtenerPerfil(
@@ -40,7 +40,7 @@ export class UsuariosController {
     );
   }
 
-  // ✅ EDITAR PERFIL
+  //  EDITAR PERFIL
   @UseGuards(AuthGuard('jwt'))
   @Patch('perfil')
   editarPerfil(
@@ -53,7 +53,7 @@ export class UsuariosController {
     );
   }
 
-  // ✅ CAMBIAR PASSWORD
+  //  CAMBIAR PASSWORD
   @UseGuards(AuthGuard('jwt'))
   @Patch('cambiar-password')
   cambiarPassword(
@@ -66,7 +66,7 @@ export class UsuariosController {
     );
   }
 
-  // ✅ EDITAR USUARIO ADMIN
+  //  EDITAR USUARIO ADMIN
   @Patch(':id')
   editarUsuario(
     @Param('id') id: string,
@@ -78,7 +78,7 @@ export class UsuariosController {
     );
   }
 
-  // ✅ ELIMINAR
+  //  ELIMINAR
   @Patch('eliminar/:id')
   eliminarUsuario(
     @Param('id') id: string

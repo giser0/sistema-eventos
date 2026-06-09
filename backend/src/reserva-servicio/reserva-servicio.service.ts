@@ -9,7 +9,7 @@ export class ReservaServicioService {
     constructor(
         @InjectRepository(ReservaServicio)
         private repo: Repository<ReservaServicio>
-    ) {}
+    ) { }
 
     crear(data: any) {
         return this.repo.save(data);

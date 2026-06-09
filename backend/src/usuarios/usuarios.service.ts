@@ -15,149 +15,149 @@ export class UsuariosService {
   constructor(
     @InjectRepository(Usuario)
     private usuarioRepository: Repository<Usuario>
-  ) {}
-// ✅ OBTENER TODOS
-async obtenerTodos() {
+  ) { }
+  //  OBTENER TODOS
+  async obtenerTodos() {
 
-  return this.usuarioRepository.find({
-    where: {
-      activo: true
-    },
-    order:{
-      id_usuario: 'DESC'
+    return this.usuarioRepository.find({
+      where: {
+        activo: true
+      },
+      order: {
+        id_usuario: 'DESC'
+      }
+    });
+
+  }
+
+  //  CREAR USUARIO
+  async crear(data: any) {
+
+    const existe =
+      await this.usuarioRepository.findOne({
+        where: {
+          email: data.email
+        }
+      });
+
+    if (existe) {
+
+      throw new BadRequestException(
+        'El correo ya existe'
+      );
+
     }
-  });
 
-}
+    const passwordHash =
+      await bcrypt.hash(
+        data.password,
+        10
+      );
 
-// ✅ CREAR USUARIO
-async crear(data: any) {
+    const nuevoUsuario =
+      this.usuarioRepository.create({
 
-  const existe =
-    await this.usuarioRepository.findOne({
-      where: {
-        email: data.email
-      }
-    });
+        nombre: data.nombre,
 
-  if (existe) {
+        email: data.email,
 
-    throw new BadRequestException(
-      'El correo ya existe'
-    );
+        telefono: data.telefono || "",
 
-  }
+        password: passwordHash,
 
-  const passwordHash =
-    await bcrypt.hash(
-      data.password,
-      10
-    );
+        rol: data.rol,
 
-  const nuevoUsuario =
-    this.usuarioRepository.create({
+        activo: true
 
-      nombre: data.nombre,
+      });
 
-      email: data.email,
+    const guardado =
+      await this.usuarioRepository.save(
+        nuevoUsuario
+      );
 
-      telefono: data.telefono || "",
+    const { password, ...user } =
+      guardado;
 
-      password: passwordHash,
-
-      rol: data.rol,
-
-      activo: true
-
-    });
-
-  const guardado =
-    await this.usuarioRepository.save(
-      nuevoUsuario
-    );
-
-  const { password, ...user } =
-    guardado;
-
-  return user;
-
-}
-
-// ✅ EDITAR USUARIO
-async editar(
-  id_usuario: number,
-  data: any
-) {
-
-  const usuario =
-    await this.usuarioRepository.findOne({
-      where: {
-        id_usuario
-      }
-    });
-
-  if (!usuario) {
-
-    throw new BadRequestException(
-      'Usuario no encontrado'
-    );
+    return user;
 
   }
 
-  if (data.nombre)
-    usuario.nombre = data.nombre;
+  //  EDITAR USUARIO
+  async editar(
+    id_usuario: number,
+    data: any
+  ) {
 
-  if (data.email)
-    usuario.email = data.email;
+    const usuario =
+      await this.usuarioRepository.findOne({
+        where: {
+          id_usuario
+        }
+      });
 
-  if (data.rol)
-    usuario.rol = data.rol;
+    if (!usuario) {
 
-  const actualizado =
+      throw new BadRequestException(
+        'Usuario no encontrado'
+      );
+
+    }
+
+    if (data.nombre)
+      usuario.nombre = data.nombre;
+
+    if (data.email)
+      usuario.email = data.email;
+
+    if (data.rol)
+      usuario.rol = data.rol;
+
+    const actualizado =
+      await this.usuarioRepository.save(
+        usuario
+      );
+
+    const { password, ...user } =
+      actualizado;
+
+    return user;
+
+  }
+
+  //  ELIMINAR USUARIO
+  async eliminar(
+    id_usuario: number
+  ) {
+
+    const usuario =
+      await this.usuarioRepository.findOne({
+        where: {
+          id_usuario
+        }
+      });
+
+    if (!usuario) {
+
+      throw new BadRequestException(
+        'Usuario no encontrado'
+      );
+
+    }
+
+    usuario.activo = false;
+
     await this.usuarioRepository.save(
       usuario
     );
 
-  const { password, ...user } =
-    actualizado;
-
-  return user;
-
-}
-
-// ✅ ELIMINAR USUARIO
-async eliminar(
-  id_usuario: number
-) {
-
-  const usuario =
-    await this.usuarioRepository.findOne({
-      where: {
-        id_usuario
-      }
-    });
-
-  if (!usuario) {
-
-    throw new BadRequestException(
-      'Usuario no encontrado'
-    );
+    return {
+      mensaje:
+        'Usuario desactivado'
+    };
 
   }
-
-  usuario.activo = false;
-
-  await this.usuarioRepository.save(
-    usuario
-  );
-
-  return {
-    mensaje:
-      'Usuario desactivado'
-  };
-
-}
-  // 🔍 PERFIL
+  //  PERFIL
   async obtenerPerfil(id_usuario: number) {
     const usuario = await this.usuarioRepository.findOne({
       where: { id_usuario, activo: true },
@@ -171,7 +171,7 @@ async eliminar(
     return user;
   }
 
-  // ✏️ EDITAR PERFIL
+  //  EDITAR PERFIL
   async editarPerfil(
     id_usuario: number,
     data: Partial<Usuario>
@@ -195,7 +195,7 @@ async eliminar(
     return user;
   }
 
-  // 🔐 CAMBIAR CONTRASEÑA
+  //  CAMBIAR CONTRASEÑA
   async cambiarPassword(
     id_usuario: number,
     password: string

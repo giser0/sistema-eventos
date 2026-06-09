@@ -9,4 +9,4 @@ import { LogsAccesoService } from './logs-acceso.service';
   controllers: [LogsAccesoController],
   providers: [LogsAccesoService],
 })
-export class LogsAccesoModule {}
+export class LogsAccesoModule { }

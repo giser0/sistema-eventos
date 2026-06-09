@@ -9,4 +9,4 @@ import { ReservaServicioService } from './reserva-servicio.service';
   controllers: [ReservaServicioController],
   providers: [ReservaServicioService],
 })
-export class ReservaServicioModule {}
+export class ReservaServicioModule { }

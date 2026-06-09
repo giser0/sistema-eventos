@@ -9,7 +9,7 @@ export class ServiciosExtraController {
 
     constructor(
         private service: ServiciosExtraService
-    ) {}
+    ) { }
 
     @Get()
     findAll() {

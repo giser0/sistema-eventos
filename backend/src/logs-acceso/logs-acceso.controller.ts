@@ -6,36 +6,36 @@ import {
 } from '@nestjs/common';
 
 import { LogsAccesoService }
-from './logs-acceso.service';
+  from './logs-acceso.service';
 
 import { CreateLogAccesoDto }
-from './dto/create-log-acceso.dto';
+  from './dto/create-log-acceso.dto';
 
 @Controller('logs')
 
 export class LogsAccesoController {
 
-    constructor(
-      private service: LogsAccesoService
-    ) {}
+  constructor(
+    private service: LogsAccesoService
+  ) { }
 
-    @Post()
-    crear(
+  @Post()
+  crear(
 
-      @Body()
-      body: CreateLogAccesoDto
+    @Body()
+    body: CreateLogAccesoDto
 
-    ) {
+  ) {
 
-        return this.service.crearLog(body);
+    return this.service.crearLog(body);
 
-    }
+  }
 
-    @Get()
-    findAll() {
+  @Get()
+  findAll() {
 
-        return this.service.findAll();
+    return this.service.findAll();
 
-    }
+  }
 
 }
