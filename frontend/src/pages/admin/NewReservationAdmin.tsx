@@ -61,7 +61,7 @@ function NewReservationAdmin() {
       async () => {
 
         const local =
-          await localService.getById(1);
+  await localService.getById(2);
 
         const precio =
           Number(local.precio);
@@ -177,7 +177,7 @@ function NewReservationAdmin() {
               usuario.id_usuario || usuario.id
             ),
 
-            id_local: 1,
+            id_local: 2,
 
             creado_por:
               admin.id,

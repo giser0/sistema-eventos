@@ -52,7 +52,7 @@ function NewBooking() {
   useEffect(() => {
 
     localService
-      .getById(1)
+      .getById(2)
       .then(local => {
 
         const precio =
@@ -132,7 +132,7 @@ function NewBooking() {
 
     id_usuario: user.id,
 
-    id_local: 1,
+    id_local: 2,
 
     creado_por: user.id,
 
