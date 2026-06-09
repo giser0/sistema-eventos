@@ -20,6 +20,7 @@ import { LogAcceso } from '../logs-acceso/entities/log-acceso';
 export class AuthService {
 
   constructor(
+    
     @InjectRepository(Usuario)
     private usuarioRepository: Repository<Usuario>,
 
@@ -28,19 +29,28 @@ export class AuthService {
 
     private jwtService: JwtService
   ) {
+    console.log('EMAIL_USER:', process.env.EMAIL_USER);
+console.log('EMAIL_PASS:', process.env.EMAIL_PASS ? 'OK' : 'VACIO');
     this.transporter.verify()
       .then(() => console.log('Correo conectado correctamente'))
       .catch(err => console.log(err));
   }
 
   // 🔥 TRANSPORTER
+  
   private transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASS
-    }
-  });
+  host: 'smtp.gmail.com',
+  port: 587,
+  secure: false,
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS,
+    
+  },
+  
+  
+});
+
 
   // 🔐 LOGIN
   async login(
@@ -55,7 +65,9 @@ export class AuthService {
     if (!usuario) {
       throw new UnauthorizedException('Credenciales inválidas');
     }
-
+this.transporter.verify()
+  .then(() => console.log('SMTP OK'))
+  .catch(err => console.log('SMTP ERROR', err));
     const passwordValida = await bcrypt.compare(
       password,
       usuario.password
