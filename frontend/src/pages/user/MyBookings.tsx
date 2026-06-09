@@ -114,11 +114,22 @@ function MyBookings() {
 
         cargarReservas();
 
-      } catch (error) {
+      } catch (error: any) {
 
-        console.log(error);
+  console.log(error);
 
-      }
+  console.log(
+    "ERROR BACKEND:",
+    error?.response?.data
+  );
+
+  alert(
+    JSON.stringify(
+      error?.response?.data
+    )
+  );
+
+}
 
   };
 

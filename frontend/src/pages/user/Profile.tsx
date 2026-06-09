@@ -35,7 +35,7 @@ function Profile() {
   useEffect(() => {
 
     fetch(
-      "http://localhost:3000/usuarios/perfil",
+      "https://sistemas-eventos-db.onrender.com/usuarios/perfil",
       {
 
         headers: {
@@ -98,7 +98,7 @@ function Profile() {
 
         // 🔥 actualizar perfil
         const response = await fetch(
-          "http://localhost:3000/usuarios/perfil",
+          "https://sistemas-eventos-db.onrender.com/usuarios/perfil",
           {
 
             method: "PATCH",
@@ -150,7 +150,7 @@ function Profile() {
 
           const passwordResponse =
             await fetch(
-              "http://localhost:3000/usuarios/cambiar-password",
+              "https://sistemas-eventos-db.onrender.com/usuarios/perfil",
               {
 
                 method: "PATCH",
